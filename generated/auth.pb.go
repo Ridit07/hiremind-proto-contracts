@@ -249,7 +249,7 @@ const file_auth_proto_rawDesc = "" +
 	"\faccess_token\x18\x01 \x01(\tR\vaccessToken2t\n" +
 	"\vAuthService\x123\n" +
 	"\x06Signup\x12\x13.auth.SignupRequest\x1a\x14.auth.SignupResponse\x120\n" +
-	"\x05Login\x12\x12.auth.LoginRequest\x1a\x13.auth.LoginResponseB7Z5github.com/Ridit07/hiremind-proto-contracts/generatedb\x06proto3"
+	"\x05Login\x12\x12.auth.LoginRequest\x1a\x13.auth.LoginResponseBAZ?github.com/Ridit07/hiremind-proto-contracts/generated;generatedb\x06proto3"
 
 var (
 	file_auth_proto_rawDescOnce sync.Once
