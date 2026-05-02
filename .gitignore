@@ -1,0 +1,15 @@
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+
+# binaries
+bin/
+dist/
+
+# temp
+tmp/
+
+# logs
+*.log
