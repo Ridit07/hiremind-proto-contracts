@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package common;
+
+option go_package = "github.com/Ridit07/hiremind-proto-contracts/generated/common;common";
+
+// Enum for error types
+enum ErrorType {
+  UNKNOWN = 0;
+  DATABASE = 1;
+  SYSTEM = 2;
+  BAD_REQUEST = 3;
+  NOT_FOUND = 4;
+  UNAUTHORIZED = 5;
+  FORBIDDEN = 6;
+  CONFLICT = 7;
+}
+
+// Common error structure
+message Error {
+  int32 code = 1;        // HTTP status code (e.g., 400, 500)
+  ErrorType type = 2;    // Type of error
+  string message = 3;    // Human readable message
+}

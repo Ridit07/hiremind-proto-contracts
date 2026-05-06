@@ -2,7 +2,10 @@ syntax = "proto3";
 
 package auth;
 
-option go_package = "github.com/Ridit07/hiremind-proto-contracts/generated;generated";
+option go_package = "github.com/Ridit07/hiremind-proto-contracts/generated/auth;auth";
+
+import "common/common.proto";
+
 
 service AuthService {
   rpc Signup (SignupRequest) returns (SignupResponse);
@@ -17,7 +20,8 @@ message SignupRequest {
 }
 
 message SignupResponse {
-  string message = 1;
+  common.Error error = 1;
+  string message = 2;
 }
 
 message LoginRequest {

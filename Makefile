@@ -1,6 +1,8 @@
 PROTO_DIR=proto
 GEN_DIR=generated
 
+PROTO_FILES=$(shell find $(PROTO_DIR) -name "*.proto")
+
 .PHONY: proto clean
 
 proto:
@@ -12,7 +14,7 @@ proto:
 		--go_opt=paths=source_relative \
 		--go-grpc_out=$(GEN_DIR) \
 		--go-grpc_opt=paths=source_relative \
-		$(PROTO_DIR)/*.proto
+		$(PROTO_FILES)
 
 clean:
 	rm -rf $(GEN_DIR)
