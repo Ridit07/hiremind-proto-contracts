@@ -22,11 +22,60 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type UserType int32
+
+const (
+	UserType_USER_TYPE_UNSPECIFIED UserType = 0
+	UserType_USER_TYPE_CANDIDATE   UserType = 1
+	UserType_USER_TYPE_HR          UserType = 2
+)
+
+// Enum value maps for UserType.
+var (
+	UserType_name = map[int32]string{
+		0: "USER_TYPE_UNSPECIFIED",
+		1: "USER_TYPE_CANDIDATE",
+		2: "USER_TYPE_HR",
+	}
+	UserType_value = map[string]int32{
+		"USER_TYPE_UNSPECIFIED": 0,
+		"USER_TYPE_CANDIDATE":   1,
+		"USER_TYPE_HR":          2,
+	}
+)
+
+func (x UserType) Enum() *UserType {
+	p := new(UserType)
+	*p = x
+	return p
+}
+
+func (x UserType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (UserType) Descriptor() protoreflect.EnumDescriptor {
+	return file_auth_auth_proto_enumTypes[0].Descriptor()
+}
+
+func (UserType) Type() protoreflect.EnumType {
+	return &file_auth_auth_proto_enumTypes[0]
+}
+
+func (x UserType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use UserType.Descriptor instead.
+func (UserType) EnumDescriptor() ([]byte, []int) {
+	return file_auth_auth_proto_rawDescGZIP(), []int{0}
+}
+
 type SignupRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
 	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
-	UserType      string                 `protobuf:"bytes,3,opt,name=user_type,json=userType,proto3" json:"user_type,omitempty"`
+	UserType      UserType               `protobuf:"varint,3,opt,name=user_type,json=userType,proto3,enum=auth.UserType" json:"user_type,omitempty"`
 	PhoneNumber   string                 `protobuf:"bytes,4,opt,name=phone_number,json=phoneNumber,proto3" json:"phone_number,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -76,11 +125,11 @@ func (x *SignupRequest) GetPassword() string {
 	return ""
 }
 
-func (x *SignupRequest) GetUserType() string {
+func (x *SignupRequest) GetUserType() UserType {
 	if x != nil {
 		return x.UserType
 	}
-	return ""
+	return UserType_USER_TYPE_UNSPECIFIED
 }
 
 func (x *SignupRequest) GetPhoneNumber() string {
@@ -242,11 +291,11 @@ var File_auth_auth_proto protoreflect.FileDescriptor
 
 const file_auth_auth_proto_rawDesc = "" +
 	"\n" +
-	"\x0fauth/auth.proto\x12\x04auth\x1a\x13common/common.proto\"\x81\x01\n" +
+	"\x0fauth/auth.proto\x12\x04auth\x1a\x13common/common.proto\"\x91\x01\n" +
 	"\rSignupRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
-	"\bpassword\x18\x02 \x01(\tR\bpassword\x12\x1b\n" +
-	"\tuser_type\x18\x03 \x01(\tR\buserType\x12!\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\x12+\n" +
+	"\tuser_type\x18\x03 \x01(\x0e2\x0e.auth.UserTypeR\buserType\x12!\n" +
 	"\fphone_number\x18\x04 \x01(\tR\vphoneNumber\"O\n" +
 	"\x0eSignupResponse\x12#\n" +
 	"\x05error\x18\x01 \x01(\v2\r.common.ErrorR\x05error\x12\x18\n" +
@@ -255,7 +304,11 @@ const file_auth_auth_proto_rawDesc = "" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\"2\n" +
 	"\rLoginResponse\x12!\n" +
-	"\faccess_token\x18\x01 \x01(\tR\vaccessToken2t\n" +
+	"\faccess_token\x18\x01 \x01(\tR\vaccessToken*P\n" +
+	"\bUserType\x12\x19\n" +
+	"\x15USER_TYPE_UNSPECIFIED\x10\x00\x12\x17\n" +
+	"\x13USER_TYPE_CANDIDATE\x10\x01\x12\x10\n" +
+	"\fUSER_TYPE_HR\x10\x022t\n" +
 	"\vAuthService\x123\n" +
 	"\x06Signup\x12\x13.auth.SignupRequest\x1a\x14.auth.SignupResponse\x120\n" +
 	"\x05Login\x12\x12.auth.LoginRequest\x1a\x13.auth.LoginResponseBAZ?github.com/Ridit07/hiremind-proto-contracts/generated/auth;authb\x06proto3"
@@ -272,25 +325,28 @@ func file_auth_auth_proto_rawDescGZIP() []byte {
 	return file_auth_auth_proto_rawDescData
 }
 
+var file_auth_auth_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_auth_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_auth_auth_proto_goTypes = []any{
-	(*SignupRequest)(nil),  // 0: auth.SignupRequest
-	(*SignupResponse)(nil), // 1: auth.SignupResponse
-	(*LoginRequest)(nil),   // 2: auth.LoginRequest
-	(*LoginResponse)(nil),  // 3: auth.LoginResponse
-	(*common.Error)(nil),   // 4: common.Error
+	(UserType)(0),          // 0: auth.UserType
+	(*SignupRequest)(nil),  // 1: auth.SignupRequest
+	(*SignupResponse)(nil), // 2: auth.SignupResponse
+	(*LoginRequest)(nil),   // 3: auth.LoginRequest
+	(*LoginResponse)(nil),  // 4: auth.LoginResponse
+	(*common.Error)(nil),   // 5: common.Error
 }
 var file_auth_auth_proto_depIdxs = []int32{
-	4, // 0: auth.SignupResponse.error:type_name -> common.Error
-	0, // 1: auth.AuthService.Signup:input_type -> auth.SignupRequest
-	2, // 2: auth.AuthService.Login:input_type -> auth.LoginRequest
-	1, // 3: auth.AuthService.Signup:output_type -> auth.SignupResponse
-	3, // 4: auth.AuthService.Login:output_type -> auth.LoginResponse
-	3, // [3:5] is the sub-list for method output_type
-	1, // [1:3] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	0, // 0: auth.SignupRequest.user_type:type_name -> auth.UserType
+	5, // 1: auth.SignupResponse.error:type_name -> common.Error
+	1, // 2: auth.AuthService.Signup:input_type -> auth.SignupRequest
+	3, // 3: auth.AuthService.Login:input_type -> auth.LoginRequest
+	2, // 4: auth.AuthService.Signup:output_type -> auth.SignupResponse
+	4, // 5: auth.AuthService.Login:output_type -> auth.LoginResponse
+	4, // [4:6] is the sub-list for method output_type
+	2, // [2:4] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_auth_auth_proto_init() }
@@ -303,13 +359,14 @@ func file_auth_auth_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_auth_auth_proto_rawDesc), len(file_auth_auth_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      1,
 			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_auth_auth_proto_goTypes,
 		DependencyIndexes: file_auth_auth_proto_depIdxs,
+		EnumInfos:         file_auth_auth_proto_enumTypes,
 		MessageInfos:      file_auth_auth_proto_msgTypes,
 	}.Build()
 	File_auth_auth_proto = out.File

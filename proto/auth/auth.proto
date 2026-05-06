@@ -12,10 +12,19 @@ service AuthService {
   rpc Login (LoginRequest) returns (LoginResponse);
 }
 
+
+
+enum UserType {
+  USER_TYPE_UNSPECIFIED = 0;
+  USER_TYPE_CANDIDATE = 1;
+  USER_TYPE_HR = 2;
+}
+
+
 message SignupRequest {
   string email = 1;
   string password = 2;
-  string user_type = 3;
+  UserType user_type = 3;
   string phone_number = 4;
 }
 
