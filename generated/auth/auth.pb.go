@@ -246,6 +246,8 @@ func (x *LoginRequest) GetPassword() string {
 type LoginResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	AccessToken   string                 `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	RefreshToken  string                 `protobuf:"bytes,2,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
+	Error         *common.Error          `protobuf:"bytes,3,opt,name=error,proto3" json:"error,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -285,6 +287,20 @@ func (x *LoginResponse) GetAccessToken() string {
 		return x.AccessToken
 	}
 	return ""
+}
+
+func (x *LoginResponse) GetRefreshToken() string {
+	if x != nil {
+		return x.RefreshToken
+	}
+	return ""
+}
+
+func (x *LoginResponse) GetError() *common.Error {
+	if x != nil {
+		return x.Error
+	}
+	return nil
 }
 
 type RefreshTokenRequest struct {
@@ -502,9 +518,11 @@ const file_auth_auth_proto_rawDesc = "" +
 	"\amessage\x18\x02 \x01(\tR\amessage\"@\n" +
 	"\fLoginRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
-	"\bpassword\x18\x02 \x01(\tR\bpassword\"2\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\"|\n" +
 	"\rLoginResponse\x12!\n" +
-	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\":\n" +
+	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12#\n" +
+	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\x12#\n" +
+	"\x05error\x18\x03 \x01(\v2\r.common.ErrorR\x05error\":\n" +
 	"\x13RefreshTokenRequest\x12#\n" +
 	"\rrefresh_token\x18\x01 \x01(\tR\frefreshToken\"\x83\x01\n" +
 	"\x14RefreshTokenResponse\x12!\n" +
@@ -555,21 +573,22 @@ var file_auth_auth_proto_goTypes = []any{
 var file_auth_auth_proto_depIdxs = []int32{
 	0, // 0: auth.SignupRequest.user_type:type_name -> auth.UserType
 	9, // 1: auth.SignupResponse.error:type_name -> common.Error
-	9, // 2: auth.RefreshTokenResponse.error:type_name -> common.Error
-	9, // 3: auth.LogoutResponse.error:type_name -> common.Error
-	1, // 4: auth.AuthService.Signup:input_type -> auth.SignupRequest
-	3, // 5: auth.AuthService.Login:input_type -> auth.LoginRequest
-	5, // 6: auth.AuthService.RefreshToken:input_type -> auth.RefreshTokenRequest
-	7, // 7: auth.AuthService.Logout:input_type -> auth.LogoutRequest
-	2, // 8: auth.AuthService.Signup:output_type -> auth.SignupResponse
-	4, // 9: auth.AuthService.Login:output_type -> auth.LoginResponse
-	6, // 10: auth.AuthService.RefreshToken:output_type -> auth.RefreshTokenResponse
-	8, // 11: auth.AuthService.Logout:output_type -> auth.LogoutResponse
-	8, // [8:12] is the sub-list for method output_type
-	4, // [4:8] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	9, // 2: auth.LoginResponse.error:type_name -> common.Error
+	9, // 3: auth.RefreshTokenResponse.error:type_name -> common.Error
+	9, // 4: auth.LogoutResponse.error:type_name -> common.Error
+	1, // 5: auth.AuthService.Signup:input_type -> auth.SignupRequest
+	3, // 6: auth.AuthService.Login:input_type -> auth.LoginRequest
+	5, // 7: auth.AuthService.RefreshToken:input_type -> auth.RefreshTokenRequest
+	7, // 8: auth.AuthService.Logout:input_type -> auth.LogoutRequest
+	2, // 9: auth.AuthService.Signup:output_type -> auth.SignupResponse
+	4, // 10: auth.AuthService.Login:output_type -> auth.LoginResponse
+	6, // 11: auth.AuthService.RefreshToken:output_type -> auth.RefreshTokenResponse
+	8, // 12: auth.AuthService.Logout:output_type -> auth.LogoutResponse
+	9, // [9:13] is the sub-list for method output_type
+	5, // [5:9] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_auth_auth_proto_init() }
