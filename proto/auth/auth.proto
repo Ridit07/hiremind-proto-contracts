@@ -42,6 +42,8 @@ message LoginRequest {
 
 message LoginResponse {
   string access_token = 1;
+  string refresh_token = 2;
+  common.Error error = 3;
 }
 
 message RefreshTokenRequest {
