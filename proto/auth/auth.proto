@@ -10,8 +10,10 @@ import "common/common.proto";
 service AuthService {
   rpc Signup (SignupRequest) returns (SignupResponse);
   rpc Login (LoginRequest) returns (LoginResponse);
-}
+  rpc RefreshToken (RefreshTokenRequest) returns (RefreshTokenResponse);
+  rpc Logout (LogoutRequest) returns (LogoutResponse);
 
+}
 
 
 enum UserType {
@@ -40,4 +42,23 @@ message LoginRequest {
 
 message LoginResponse {
   string access_token = 1;
+}
+
+message RefreshTokenRequest {
+  string refresh_token = 1;
+}
+
+message RefreshTokenResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+  common.Error error = 3;
+}
+
+message LogoutRequest {
+  string refresh_token = 1;
+}
+
+message LogoutResponse {
+  string message = 1;
+  common.Error error = 2;
 }
