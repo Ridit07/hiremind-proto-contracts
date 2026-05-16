@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package interview;
+
+option go_package = "github.com/Ridit07/hiremind-proto-contracts/generated/interview;interview";
+
+import "common/common.proto";
+import "google/protobuf/timestamp.proto";
+
+service InterviewService {
+  rpc GetInterviews (GetInterviewsRequest) returns (GetInterviewsResponse);
+}
+
+enum InterviewStatus {
+  INTERVIEW_STATUS_UNSPECIFIED = 0;
+  INTERVIEW_STATUS_SCHEDULED = 1;
+  INTERVIEW_STATUS_ONGOING = 2;
+  INTERVIEW_STATUS_COMPLETED = 3;
+  INTERVIEW_STATUS_CANCELLED = 4;
+  INTERVIEW_STATUS_NO_SHOW = 5;
+  INTERVIEW_STATUS_RESCHEDULED = 6;
+}
+
+message Interview {
+  string interview_id = 1;
+  string hr_id = 2;
+  string hr_name = 3;
+  string candidate_id = 4;
+  string candidate_name = 5;
+  google.protobuf.Timestamp interview_datetime = 6;
+  InterviewStatus status = 7;
+  string interview_report_path = 8;
+  google.protobuf.Timestamp created_at = 9;
+  google.protobuf.Timestamp updated_at = 10;
+}
+
+message GetInterviewsRequest {
+  string user_id = 1;  
+}
+
+message GetInterviewsResponse {
+  repeated Interview interviews = 1;
+  common.Error error = 2;
+}
